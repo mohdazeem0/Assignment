@@ -1,0 +1,21 @@
+.card{
+    padding: 10px;
+    margin: 10px;
+    width: 60rem;
+    border: 2px solid rgb(117, 117, 65) !important;
+    background-color: beige !important;
+}
+.crud__heading{
+    text-align: center;
+}
+.add__button{
+    margin: 30px;
+    align-items: center !important;
+    width: 10rem !important;
+}
+.save__cancel{
+    flex-direction: row;
+    padding: 3px;
+    margin: 10px;
+    margin-top: 20px;
+}
