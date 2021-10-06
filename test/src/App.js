@@ -1,10 +1,10 @@
 import "./App.css";
-import { InputForm } from "./components/interface/InputForm";
+import { MainLanding } from "./components/MainLanding";
 
 function App() {
   return (
     <div className="App">
-      <InputForm />
+      <MainLanding />
     </div>
   );
 }
