@@ -61,7 +61,7 @@ export const UpdateInput = () => {
           </Row>
           <Row>
             <Form.Group as={Col}>
-              <Form.Label>Date Of Birth</Form.Label>
+              <Form.Label>Date Of Joining</Form.Label>
               <Form.Control
                 type="date"
                 onChange={(e) => setDob(e.target.value)}
@@ -83,7 +83,7 @@ export const UpdateInput = () => {
           <Row>
             <div className="save__cancel">
               <Button variant="success" onClick={update} href="/">
-                Save
+                Update & Save
               </Button>
               <Button variant="danger">Cancel</Button>
             </div>

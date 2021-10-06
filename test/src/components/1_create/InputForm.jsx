@@ -8,6 +8,7 @@ export const InputForm = () => {
   //functionality
 
   let history = useHistory();
+  const [id, setId] = useState(0);
   const [name, setName] = useState("");
   const [designation, setDesignation] = useState("");
   const [dob, setDob] = useState("");
@@ -16,20 +17,20 @@ export const InputForm = () => {
   const postData = () => {
     axios
       .post(`https://615ad2eb4a360f0017a812bb.mockapi.io/test/emp`, {
-        name,
-        designation,
-        dob,
-        age,
+        Name: name,
+        Designation: designation,
+        DOB: dob,
+        Age: age,
       })
-      .then(() => {
-        history.push("/RecordSheet");
+      .then((res) => {
+        console.log("Updated data==>", res);
       });
   };
 
   return (
     <>
       <Card id="card">
-        <h1 className="crud__heading">CRUD Operations</h1>
+        <h1 className="crud__heading">Employee Info</h1>
 
         <Form>
           <Row className="mb-3">
@@ -38,7 +39,6 @@ export const InputForm = () => {
               <Form.Control
                 type="text"
                 onChange={(e) => setName(e.target.value)}
-                id="name"
                 required={true}
               />
             </Form.Group>
@@ -48,18 +48,16 @@ export const InputForm = () => {
               <Form.Control
                 type="text"
                 onChange={(e) => setDesignation(e.target.value)}
-                id="des"
                 required={true}
               />
             </Form.Group>
           </Row>
           <Row>
             <Form.Group as={Col}>
-              <Form.Label>Date Of Birth</Form.Label>
+              <Form.Label>Date Of Joining</Form.Label>
               <Form.Control
                 type="date"
                 onChange={(e) => setDob(e.target.value)}
-                id="dob"
                 required={true}
               />
             </Form.Group>
@@ -69,14 +67,13 @@ export const InputForm = () => {
               <Form.Control
                 type="number"
                 onChange={(e) => setAge(e.target.value)}
-                id="age"
                 required={true}
               />
             </Form.Group>
           </Row>
           <Row>
             <div className="save__cancel">
-              <Button variant="success" onClick={postData} href="/">
+              <Button variant="success" onClick={postData}>
                 Save
               </Button>
               <Button variant="danger">Cancel</Button>

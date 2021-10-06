@@ -9,7 +9,20 @@ import { VscAdd } from "react-icons/vsc";
 
 export const DataLoad = () => {
   const [resData, setResData] = useState([]);
+  const [name, setName] = useState("");
+  const [designation, setDesignation] = useState("");
+  const [dob, setDob] = useState("");
+  const [age, setAge] = useState("");
 
+  const handleDelete = (id) => {
+    const newData = resData.filter((item) => !(item.id === id));
+    setResData([...newData]);
+
+    //Delete Operation
+    axios.delete(`https://615ad2eb4a360f0017a812bb.mockapi.io/test/emp/${id}`);
+  };
+
+  //Read Fetching Operation
   useEffect(() => {
     const getResData = async () => {
       try {
@@ -40,7 +53,7 @@ export const DataLoad = () => {
               <th>Id</th>
               <th>Name</th>
               <th>Designation</th>
-              <th>DOB</th>
+              <th>Date of Joining</th>
               <th>Age</th>
               <th>Actions</th>
             </tr>
@@ -58,7 +71,10 @@ export const DataLoad = () => {
                     <Button variant="info" href="/updateinput">
                       <FiEdit />
                     </Button>
-                    <Button variant="danger">
+                    <Button
+                      variant="danger"
+                      onClick={() => handleDelete(item.id)}
+                    >
                       <RiDeleteBin2Line />
                     </Button>
                   </td>
