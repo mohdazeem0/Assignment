@@ -5,6 +5,12 @@ import { DataLoad } from "./2_read/DataLoad";
 import { UpdateInput } from "./3_update/UpdateInput";
 
 export const MainLanding = () => {
+  const handleId = (myResData) => {
+    myResData.map((item) => {
+      console.log("heyyyyyyyyyyyyyy", item);
+      return item.id;
+    });
+  };
   return (
     <>
       <Router>
@@ -13,10 +19,10 @@ export const MainLanding = () => {
             <InputForm />
           </Route>
           <Route path="/updateinput">
-            <UpdateInput />
+            <UpdateInput ID={handleId} />
           </Route>
           <Route path="/">
-            <DataLoad />
+            <DataLoad handleId={handleId} />
           </Route>
         </Switch>
       </Router>

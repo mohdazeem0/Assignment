@@ -1,37 +1,35 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { Card, Button, Row, Form, Col } from "react-bootstrap";
-import { useHistory } from "react-router";
+import * as QueryString from "query-string";
+import { useLocation } from "react-router-dom";
 import "./UpdateInput.css";
 
-export const UpdateInput = () => {
-  let history = useHistory();
-  const [id, setID] = useState(null);
+export const UpdateInput = ({ ID }) => {
+  const params = QueryString.parse(useLocation().search);
+  const [id, setID] = useState("5");
   const [name, setName] = useState("");
   const [designation, setDesignation] = useState("");
   const [dob, setDob] = useState("");
   const [age, setAge] = useState("");
 
   useEffect(() => {
-    setID(localStorage.getItem("ID"));
     setName(localStorage.getItem("Name"));
     setDesignation(localStorage.getItem("Designation"));
     setDob(localStorage.getItem("dob"));
     setAge(localStorage.getItem("age"));
   }, []);
-
-  const update = () => {
-    axios
-      .put(`https://615ad2eb4a360f0017a812bb.mockapi.io/test/emp/${id}`, {
-        name,
-        designation,
-        dob,
-        age,
-      })
-      .then(() => {
-        history.push("/RecordSheet");
-      });
+  const handleUpdate = () => {
+    axios.put(`https://615ad2eb4a360f0017a812bb.mockapi.io/test/emp/${id}`, {
+      Name: name,
+      Designation: designation,
+      DOB: dob,
+      Age: age,
+    });
   };
+  useEffect(() => {
+    console.log("=======>", params);
+  }, [params]);
   return (
     <>
       <Card id="card">
@@ -82,7 +80,7 @@ export const UpdateInput = () => {
           </Row>
           <Row>
             <div className="save__cancel">
-              <Button variant="success" onClick={update} href="/">
+              <Button variant="success" onClick={handleUpdate}>
                 Update & Save
               </Button>
               <Button variant="danger">Cancel</Button>

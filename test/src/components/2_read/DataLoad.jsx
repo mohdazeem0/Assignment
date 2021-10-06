@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Card, Table, Button, Row } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import "./DataLoad.css";
 import axios from "axios";
 import { dataServer } from "./dataServer";
@@ -7,7 +8,7 @@ import { FiEdit } from "react-icons/fi";
 import { RiDeleteBin2Line } from "react-icons/ri";
 import { VscAdd } from "react-icons/vsc";
 
-export const DataLoad = () => {
+export const DataLoad = ({ handleId }) => {
   const [resData, setResData] = useState([]);
   const [name, setName] = useState("");
   const [designation, setDesignation] = useState("");
@@ -32,6 +33,7 @@ export const DataLoad = () => {
         const myResData = response.data;
         console.log("Response Data--->", myResData);
         setResData(myResData);
+        handleId(myResData);
       } catch (error) {
         console.log(error);
       }
@@ -68,9 +70,11 @@ export const DataLoad = () => {
                   <td>{item.DOB}</td>
                   <td>{item.Age}</td>
                   <td>
-                    <Button variant="info" href="/updateinput">
-                      <FiEdit />
-                    </Button>
+                    <Link to={`/updateinput/id=${item.id}`}>
+                      <Button variant="info">
+                        <FiEdit />
+                      </Button>
+                    </Link>
                     <Button
                       variant="danger"
                       onClick={() => handleDelete(item.id)}
